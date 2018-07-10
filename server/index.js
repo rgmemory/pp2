@@ -1,18 +1,33 @@
 const controller = require('./controller')
 const express = require('express')
 const bodyParser = require('body-parser')
-const app = express();
+const massive = require('massive')
 require('dotenv').config()
 
 //surfusers
 //surfproducts
-//surfjunction
+//surfcart
+
+let {
+    CONNECTION_STRING
+} = process.env
+
+const app = express();
+app.use(bodyParser.json())
+
+massive(CONNECTION_STRING).then(db => {
+    console.log('db works')
+    app.set('db', db)
+})
+
 
 
 app.listen(3005, function(){
     console.log('working on 3000')
 })
 
-app.get('/api/get', controller.test);
+app.get('/api/get', controller.getusers)
+
+app.get('/api/getproducts', controller.getproducts)
 
 

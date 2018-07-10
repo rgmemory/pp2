@@ -1,0 +1,13 @@
+.shopheader{
+    border: solid black 1px;
+    height: 90px;
+    width: 100%;
+}
+
+.shopheader-wrapper{
+    border-top: solid red 1px;
+    border-bottom: solid red 1px;
+    width: 80%;
+    height: 90px;
+    margin: auto;
+}

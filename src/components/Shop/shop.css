@@ -1,0 +1,11 @@
+.shop{
+    width: 80%;
+    height: 90px;
+    margin: auto;
+}
+
+.shop-products{
+    border: solid black 1px;
+    /* margin-bottom: 15px; */
+
+}
