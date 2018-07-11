@@ -1,9 +1,9 @@
 .header{
-    border: solid black 1px;
+    /* border: solid black 1px; */
     height: 100px;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 

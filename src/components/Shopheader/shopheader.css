@@ -1,13 +1,20 @@
 .shopheader{
-    border: solid black 1px;
-    height: 90px;
+    border-top: orange solid 2px;
+    border-bottom: orange solid 2px;
     width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    
 }
 
-.shopheader-wrapper{
-    border-top: solid red 1px;
-    border-bottom: solid red 1px;
-    width: 80%;
-    height: 90px;
-    margin: auto;
+.shopheader-links{
+    border: solid pink 1px;
+    width: 100px;
 }
+
+.cart-button{
+    border: solid pink 1px;
+    width: 80px;
+}
+

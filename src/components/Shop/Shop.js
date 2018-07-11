@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import './shop.css'
 import axios from 'axios';
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {handleProducts} from '../../ducks/reducer'
 
-export default class Shop extends Component{
+export class Shop extends Component{
     constructor(){
         super()
 
@@ -16,6 +18,8 @@ export default class Shop extends Component{
 
     componentDidMount(){
         axios.get('/api/getproducts').then(res => {
+
+            ///get the products here and call a function to update redux state
             this.setState({
                 products: res.data
             })
@@ -31,7 +35,7 @@ export default class Shop extends Component{
         let products = this.state.products.map((current, index) => {
             return(
                 <div className="shop-products" key={current + index}>
-                    <Link to="/product" onClick={() => this.selectProduct(current.id)}>
+                    <Link to={`/product/${current.id}`} onClick={() => this.selectProduct(current.id)}>
                         <div>{current.image}</div>
                         <div>{current.name}</div>
                         <div>{current.cost}</div>
@@ -54,3 +58,12 @@ export default class Shop extends Component{
         )
     }
 }
+
+const mapDispatchToProps = {
+    handleProducts
+}
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Shop)

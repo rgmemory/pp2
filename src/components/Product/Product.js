@@ -8,6 +8,8 @@ export default class Product extends Component{
     render(){
         return(
             <div className="product">
+
+            {this.props.match.params.product_id}
                 Product
             </div>
         )

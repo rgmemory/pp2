@@ -11,10 +11,19 @@ export default class Shopheader extends Component{
         return(
             <div className="shopheader">
 
-                <div className="shopheader-wrapper">
-                    Shopheader
-
+                <div className="shopheader-links">
+                    <div>All</div>
+                    <div>Accesories</div>
+                    <div>Skateboards</div>
                 </div>
+
+                <div className="cart-button">
+                    CART
+                </div>
+                    
+
+                    
+
             </div>
         )
     }
