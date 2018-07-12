@@ -13,5 +13,12 @@ module.exports = {
 
             res.status(200).send(products)
         })
+    },
+
+    addtocart: function(req, res){
+        console.log('req.body', req.body.id, req.body.size)
+        // req.app.get('db').add_to_cart().then(cart => {
+        //     console.log('backend cart', cart)
+        // })
     }
 }

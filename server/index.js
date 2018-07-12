@@ -30,4 +30,6 @@ app.get('/api/get', controller.getusers)
 
 app.get('/api/getproducts', controller.getproducts)
 
+app.post('/api/addtocart', controller.addtocart)
+
 

@@ -2,9 +2,10 @@
 
 const initialState = {
     cart: [],
-    products: []
+    products: [],
+    size: null,
+    quantity: null
 }
-
 
 //action types
 
@@ -19,12 +20,17 @@ const PRODUCTS = 'PRODUCTS'
 export default function reducer(state = initialState, action){
     switch(action.type){
         case CART:
-            return Object.assign({}, state, {cart: action.payload})///copied cart Plus the new 
+            let tempCart = state.cart;
+            tempCart.push(action.payload)
+            return Object.assign({}, state, {cart: tempCart})///copied cart Plus the new 
+
         case PRODUCTS:
             return Object.assign({}, state, {products: action.payload})
+
+        default: 
+            return state
     }
 }
-
 
 //actions
 
@@ -41,5 +47,3 @@ export function handleProducts(value){
         payload: value
     }
 }
-
-
