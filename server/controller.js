@@ -2,8 +2,8 @@ module.exports = {
     getusers: function(req, res){
         console.log('test works')
 
-        req.app.get('db').get_surfusers().then(users => {
-            console.log('users', users);
+        req.app.get('db').get_users().then(users => {
+            // console.log('users', users);
         })
     },
 
@@ -12,6 +12,14 @@ module.exports = {
             console.log('products', products)
 
             res.status(200).send(products)
+        })
+    },
+
+    getfiltered: function(req, res){
+        console.log('req.body', req.body.filter)
+        req.app.get('db').get_filtered(req.body.filter).then(cart => {
+            console.log('backend cart', cart)
+            res.status(200).send(cart)
         })
     },
 

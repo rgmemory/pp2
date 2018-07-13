@@ -2,29 +2,42 @@ import React, {Component} from 'react'
 import './shopheader.css'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+import {handleProducts} from '../../ducks/reducer'
 // import './shop.css'
 
 export class Shopheader extends Component{
     constructor(){
         super()
+
+        this.getFiltered = this.getFiltered.bind(this)
+    }
+
+    getFiltered(filter){
+        console.log(filter)
+        if(filter == 'all'){
+            axios.get('/api/getproducts').then(res => {
+                this.props.handleProducts(res.data)
+            })
+        }else{
+            axios.post('api/getfiltered', {filter}).then(res => {
+                this.props.handleProducts(res.data)
+            })
+        }
     }
 
     render(){
 
-        console.log('cart on header', this.props.cart, this.props.cart.length)
         return(
             <div className="shopheader">
 
                 <div className="shopheader-links">
-                    <div>All</div>
-                    <div>Accesories</div>
-                    <div>Shoes</div>
+                    <button onClick={() => {this.getFiltered('all')}}>All</button>
+                    <button onClick={() => {this.getFiltered('acc')}}>Accesories</button>
+                    <button onClick={() => {this.getFiltered('shoes')}}>Shoes</button>
                 </div>
 
-                <div className="cart-button">
-                    <Link to="/cart">CART</Link>
-                    {this.props.cart.length}
-                </div>
+                
             </div>
         )
     }
@@ -33,8 +46,13 @@ export class Shopheader extends Component{
 
 function mapStateToProps(state){
     return{
-        cart: state.cart
+        cart: state.cart,
+        products: state.cart
     }
 }
 
-export default connect(mapStateToProps)(Shopheader)
+const mapDispatchToProps = {
+    handleProducts
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Shopheader)

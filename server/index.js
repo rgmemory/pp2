@@ -4,9 +4,9 @@ const bodyParser = require('body-parser')
 const massive = require('massive')
 require('dotenv').config()
 
-//surfusers
-//surfproducts
-//surfcart
+//nikeusers
+//nikeproducts
+//nikecart
 
 let {
     CONNECTION_STRING
@@ -30,6 +30,10 @@ app.get('/api/get', controller.getusers)
 
 app.get('/api/getproducts', controller.getproducts)
 
+app.post('/api/getfiltered', controller.getfiltered)
+
 app.post('/api/addtocart', controller.addtocart)
+
+
 
 

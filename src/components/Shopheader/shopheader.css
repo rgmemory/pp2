@@ -11,6 +11,13 @@
 .shopheader-links{
     border: solid pink 1px;
     width: 100px;
+    display: flex;
+}
+
+.shopheader-links button{
+    border: solid green 2px;
+    width: 100px;
+    display: flex;
 }
 
 .cart-button{
