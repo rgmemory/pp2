@@ -11,6 +11,7 @@ const initialState = {
 
 const CART = 'CART'
 const PRODUCTS = 'PRODUCTS'
+const REMOVECART = 'REMOVECART'
 
 
 //reducer
@@ -31,6 +32,11 @@ export default function reducer(state = initialState, action){
         case PRODUCTS:
             return Object.assign({}, state, {products: action.payload})
 
+        case REMOVECART:
+            // let tempCart = state.cart.slice(( - 1), value)
+            
+            return Object.assign({}, state, {cart: action.payload})
+
         default: 
             return state
     }
@@ -48,6 +54,14 @@ export function handleCart(value){
 export function handleProducts(value){
     return{
         type: PRODUCTS,
+        payload: value
+    }
+}
+
+export function removeCart(value){
+    console.log('remove cart called', value)
+    return{
+        type: REMOVECART,
         payload: value
     }
 }
