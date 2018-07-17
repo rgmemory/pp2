@@ -2,6 +2,10 @@ const controller = require('./controller')
 const express = require('express')
 const bodyParser = require('body-parser')
 const massive = require('massive')
+
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+const session = require('express-session')
 require('dotenv').config()
 
 //nikeusers
@@ -26,9 +30,10 @@ app.listen(3005, function(){
     console.log('working on 3000')
 })
 
-app.get('/api/get', controller.getusers)
+// app.get('/api/get', controller.getusers)
 
 app.get('/api/getproducts', controller.getproducts)
+app.get('/api/getproduct/:id', controller.getproduct)
 
 app.post('/api/getfiltered', controller.getfiltered)
 

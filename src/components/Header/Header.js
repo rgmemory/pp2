@@ -9,17 +9,17 @@ export class Header extends Component{
     }
 
     render(){
-        // console.log('cart on header', this.props.cart.length, this.props.cart)
+        console.log('cart on header', this.props.cart.length, this.props.cart)
         return(
             <div className="header">
 
             {/* {this.props.cart} */}
 
                 <div className="header-logo">
-                    {/* <Link to="/">
+                    <Link to="/">
                         <h1>salt</h1>
                         <h1>surf</h1>
-                    </Link> */}
+                    </Link>
                 </div>
 
                 <div className="header-links">

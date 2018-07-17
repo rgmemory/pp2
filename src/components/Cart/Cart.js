@@ -1,16 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {removeCart} from '../../ducks/reducer'
 export class Cart extends Component{
     constructor(){
         super()
 
     }
 
-    
     render(){
         console.log('cart', this.props.cart)
+
+        // let displayCart = this.props.cart.map((current, index) => {
+        //     return(
+        //         <div key={current + index}>
+        //             {this.props.products[]}
+        //             {current.size}
+        //             {current.id}
+        //         </div>
+        //     )
+        // })
 
         let tempArray = [];
 
@@ -36,7 +44,7 @@ export class Cart extends Component{
                     {current.name}
                     {current.cost}
                     {current.size}
-                    <button onClick={() => {this.props.removeCart(current.id)}}>REMOVE</button>
+                    <button>REMOVE</button>
                     <button>EDIT</button>
                 </div>
             )
@@ -70,8 +78,4 @@ function mapStateToProps(state){
     }
 }
 
-const mapDispatchToProps = {
-    removeCart
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default connect(mapStateToProps)(Cart)
