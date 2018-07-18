@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import './header.css'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import swoosh from './swoosh.png'
+import cart from './cart.png'
+
+
 
 export class Header extends Component{
     constructor(){
@@ -17,15 +21,13 @@ export class Header extends Component{
 
                 <div className="header-logo">
                     <Link to="/">
-                        <h1>salt</h1>
-                        <h1>surf</h1>
+                        <img src={swoosh} />
                     </Link>
                 </div>
 
                 <div className="header-links">
           
                     <Link to="/about"><div>ABOUT</div></Link>
-                    <div><Link to="/surf">SURF</Link></div>
                     <div><Link to="/shop">SHOP</Link></div>
                     <div><Link to="/login">LOGIN</Link></div>
              
@@ -33,8 +35,8 @@ export class Header extends Component{
                 </div>
 
                 <div className="cart-button">
-                    <Link to="/cart">CART</Link>
-                    {this.props.cart.length}
+                    <Link to="/cart"><img src={cart}/></Link>
+                    <div className="cart-total">{this.props.cart.length}</div>
                 </div>
 
 

@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {handleProducts} from '../../ducks/reducer'
+
 // import './shop.css'
 
 export class Shopheader extends Component{

@@ -1,11 +1,37 @@
 .shop{
-    /* width: 80%;
-    height: 90px;
-    margin: auto; */
+    border: solid black 1px;
+    height: 100vh;
+    width: 100%;
+    
+}
+
+.shop-wrapper{
+    /* border: solid green 3px; */
+    width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .shop-products{
-    border: solid black 1px;
-    /* margin-bottom: 15px; */
+    /* border: solid black 1px; */
+    text-decoration: none;
+    height: 320px;
+    width: 260px;
+    margin-bottom: 20px;
+}
 
+.shop-products-image img{
+    /* border: solid black 1px; */
+    height: 60%;
+    width: 100%;
+}
+.shop-products-name{
+    color: black;
+    border-bottom: #666;
+}
+.shop-products-cost{
+    color: #666666
 }

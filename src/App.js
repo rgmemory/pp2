@@ -17,11 +17,11 @@ class App extends Component {
 
         
 
-        <div className="wrapper">
+        {/* <div className="wrapper"> */}
           <Header />
           <Shopheader />
           {routes}
-        </div>
+        {/* </div> */}
         
       </div>
     );

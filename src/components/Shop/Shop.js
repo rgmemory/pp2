@@ -24,9 +24,9 @@ export class Shop extends Component{
             return(
                 <div className="shop-products" key={current + index}>
                     <Link to={`/product/${current.id}`}>
-                        <div>{current.image}</div>
-                        <div>{current.name}</div>
-                        <div>{current.cost}</div>
+                        <div className="shop-products-image"><img src={current.image} /></div>
+                        <div className="shop-products-name">{current.name}</div>
+                        <div className="shop-products-cost">{current.cost}</div>
                     </Link>
                 </div>
             )
@@ -35,10 +35,9 @@ export class Shop extends Component{
         return(
             <div className="shop">
                 <div className="shop-wrapper">
-                    Shop
-                    <div>
+                    {/* <div className="shop-products-container"> */}
                         {products}
-                    </div>
+                    {/* </div> */}
                     
                 </div>
             </div>
