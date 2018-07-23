@@ -12,12 +12,7 @@ export default class Login extends Component{
         
         return(
             <div className="login">
-            <Link to="/checkout">Login</Link>
-
-
-                
-                
-               
+                <Link to="/checkout">Login</Link>
             </div>
         )
     }

@@ -5,20 +5,14 @@ import {connect} from 'react-redux'
 import swoosh from './swoosh.png'
 import cart from './cart.png'
 
-
-
 export class Header extends Component{
     constructor(){
         super()
     }
 
     render(){
-        console.log('cart on header', this.props.cart.length, this.props.cart)
         return(
             <div className="header">
-
-            {/* {this.props.cart} */}
-
                 <div className="header-logo">
                     <Link to="/">
                         <img src={swoosh} />
@@ -31,12 +25,11 @@ export class Header extends Component{
                     <div><Link to="/shop">SHOP</Link></div>
                     <div><Link to="/login">LOGIN</Link></div>
              
-                 
                 </div>
 
                 <div className="cart-button">
                     <Link to="/cart"><img src={cart}/></Link>
-                    <div className="cart-total">{this.props.cart.length}</div>
+                    <div className="cart-total">{this.props.cartSize}</div>
                 </div>
 
 
@@ -47,7 +40,7 @@ export class Header extends Component{
 
 function mapStateToProps(state){
     return{
-        cart: state.cart
+        cartSize: state.cartSize
     }
 }
 

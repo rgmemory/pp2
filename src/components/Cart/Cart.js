@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {handleTotal} from '../../ducks/reducer'
 import './cart.css'
+import axios from 'axios'
 
 export class Cart extends Component{
     constructor(){
@@ -12,8 +12,14 @@ export class Cart extends Component{
            productArray: [],
            subtotal: 0,
            taxes: 0,
-           total: 0
+           total: 0,
+           cart: []
        }
+
+       this.checkout = this.checkout.bind(this)
+       this.remove = this.remove.bind(this)
+       this.edit = this.edit.bind(this)
+
     }
 
     componentDidMount(){
@@ -46,23 +52,42 @@ export class Cart extends Component{
         })
 
         this.props.handleTotal(this.state.total)
+
+        axios.get('/api/getcheckout').then(res => {
+            this.setState({
+                cart: res.data
+            })
+        })
+
+    }
+
+    checkout(){
+   
+        this.props.handleTotal(this.state.subtotal)
+    }
+
+    remove(value){
+        console.log('remove clicked', value)
+
+        axios.delete(`/api/remove/${value}`, {product_id: value}).then(stuff => {
+            console.log('remove', stuff.data)
+            // this.setState
+            axios.get('/api/getcheckout').then(res => {
+                console.log(res.data, 'front end checkout', res.data.length)
+                this.setState({
+                    cart: res.data
+                })
+            })
+        })
+    }
+
+    edit(value){
+        console.log('edit clicked', value)
     }
 
     render(){
-        console.log('cart', this.props.cart)
-        console.log('total', this.state.subtotal)
 
-        // let displayCart = this.props.cart.map((current, index) => {
-        //     return(
-        //         <div key={current + index}>
-        //             {this.props.products[]}
-        //             {current.size}
-        //             {current.id}
-        //         </div>
-        //     )
-        // })
-
-        let displayCart = this.state.productArray.map((current, index) => {
+        let displayCart = this.state.cart.map((current, index) => {
             return(
                 <div className="cart-product" key={current + index}>
                     <div className="cart-product-image"><img src={current.image}></img></div>
@@ -72,8 +97,8 @@ export class Cart extends Component{
                         <div className="cart-product-size">{current.size}</div>
 
                             <div className="cart-product-buttons">
-                                <div className="cart-product-remove"><button>REMOVE</button></div>
-                                <div className="cart-product-edit"><button>EDIT</button></div>
+                                <div className="cart-product-remove"><button onClick={() => this.remove(current.id)}>REMOVE</button></div>
+                                <div className="cart-product-edit"><button onClick={() => this.edit(current.id)}>EDIT</button></div>
                             </div>
                             
                     </div>
@@ -82,6 +107,7 @@ export class Cart extends Component{
                 </div>
             )
         })
+
 
         return(
             <div className="cart">
@@ -102,8 +128,6 @@ export class Cart extends Component{
                             <div>{displayCart}</div>
                         </div>
                     </div>
-
-                    {/* <div className="cart-right"> */}
                     
                     <div className="cart-right">
                         <div className="cart-summary">
@@ -114,7 +138,8 @@ export class Cart extends Component{
 
                             <div>TOTAL: ${this.state.total}</div>
 
-                            <Link to="/login" onClick={ () => {this.props.handleTotal(this.state.subtotal)}}>CHECKOUT</Link>
+                            <button onClick={this.test}></button>                            
+                            <Link to="/login" onClick={this.checkout}>CHECKOUT</Link>
                         </div>
                     </div>
 
@@ -126,13 +151,9 @@ export class Cart extends Component{
 
 function mapStateToProps(state){
     return{
-        cart: state.cart,
-        products: state.products
+        cartSize: state.cartSize
     }
 }
 
-const mapDispatchToProps = {
-    handleTotal
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
+export default connect(mapStateToProps)(Cart)

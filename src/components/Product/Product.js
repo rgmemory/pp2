@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {handleCart} from '../../ducks/reducer'
+import {handleCartSize} from '../../ducks/reducer'
 import axios from 'axios'
 import './product.css'
 
@@ -10,54 +10,55 @@ export class Product extends Component{
         super()
 
         this.state = {
-            size: 8
+            size: 8,
+            product: []
         }
 
         this.handleSize = this.handleSize.bind(this)
         this.addToCart = this.addToCart.bind(this)
     }
 
-  
+    componentDidMount(){
+        axios.get(`/api/getproduct/${this.props.match.params.product_id}`).then(res => {
+            this.setState({
+                product: res.data[0]
+            })
+        })
+    }
 
     handleSize(value){
-        console.log('value', value)
         this.setState({
             size: value
         })
     }
 
     addToCart(id, size){
-        this.props.handleCart({id, size});
-        // axios.post('/api/addtocart', {id, size}).then(res => {
-        //     console.log('front end fired', res)
-        // })
+
+        axios.post('/api/addtocart', {id, size, user_id: 1}).then(res => {
+            this.props.handleCartSize(res.data.length)
+        })
     }
 
-
     render(){
-
-
-        let product = this.props.products[this.props.match.params.product_id - 1]
-
         return(
             <div className="product">
                 <div className="product-wrapper">
 
                     <div className="product-images">
-                        <img src={product.image}/>
-                        <img src={product.image}/>
-                        <img src={product.image}/>
-                        <img src={product.image}/>
+                        <img src={this.state.product.image}/>
+                        <img src={this.state.product.image}/>
+                        <img src={this.state.product.image}/>
+                        <img src={this.state.product.image}/>
+                        
                     </div>
 
                     <div className="product-info">
                         <div className="product-info-top">
-                            <div className="product description">TYPE{product.description}</div>
-                            <div className="product-cost">${product.cost}</div>
+                            <div className="product description">TYPE{this.state.product.description}</div>
+                            <div className="product-cost">${this.state.product.cost}</div>
                         </div>
-                            <div className="product-name">{product.name}</div>
+                            <div className="product-name">{this.state.product.name}</div>
 
-                    
                         <div className="product-choose-size">
                             <p>CHOOSE SIZE</p>
                         </div>
@@ -79,19 +80,6 @@ export class Product extends Component{
                         <button onClick={() => {this.handleSize(14)}}>14</button>
                         <button onClick={() => {this.handleSize(15)}}>15</button>
                  
-                        {/* <select name="size" value={this.state.size} onChange={(e) => {this.handleSize(e.target.value)}}>
-                            <option value="8">8</option>
-                            <option value="8.5">8.5</option>
-                            <option value="9">9</option>
-                            <option value="9.5">9.5</option>
-                            <option value="10">10</option>
-                            <option value="10.5">10.5</option>
-                            <option value="11">11</option>
-                            <option value="11.5">11.5</option>
-                            <option value="12">12</option>
-                            <option value="12.5">12.5</option>
-                            <option value="13">13</option>
-                        </select>   */}
                     </div>     
 
                     <div className="product-add-cart"> 
@@ -102,7 +90,7 @@ export class Product extends Component{
                         )}}>ADD TO CART</button>
                     </div>
 
-                    <div className="product description">DESCRIPTIONDESCRIPTIONDESCRIPTIONDESCRIPTIONDESCRIPTIONDESCRIPTIONDESCRIPTIONDESCRIPTION{product.description}</div>
+                    <div className="product description">DESCRIPTION{this.state.product.description}</div>
 
                     </div>
                 </div>
@@ -112,17 +100,14 @@ export class Product extends Component{
     }
 }
 
-
-const mapDispatchToProps = {
-    handleCart
-}
-
 function mapStateToProps(state){
     return{
-        products: state.products,
-        cart: state.cart
-   
+        cartSize: state.cartSize
     }
+}
+
+const mapDispatchToProps = {
+    handleCartSize
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)

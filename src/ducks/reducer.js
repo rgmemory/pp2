@@ -1,17 +1,13 @@
 //state
 
 const initialState = {
-    cart: [],
-    products: [],
+    cartSize: null,
     total: null
-    // size: null,
-    // quantity: null
 }
 
 //action types
 
-const CART = 'CART'
-const PRODUCTS = 'PRODUCTS'
+const CARTSIZE = 'CART'
 const TOTAL = 'TOTAL'
 
 
@@ -22,13 +18,14 @@ const TOTAL = 'TOTAL'
 export default function reducer(state = initialState, action){
     switch(action.type){
 
-        case CART:
-            let tempCart = state.cart.slice(0);
-            tempCart.push(action.payload)
-            return Object.assign({}, state, {cart: tempCart})///copied cart Plus the new 
+        // case CART:
+        //     let tempCart = state.cart.slice(0);
+        //     tempCart.push(action.payload)
+        //     return Object.assign({}, state, {cart: tempCart})///copied cart Plus the new 
 
-        case PRODUCTS:
-            return Object.assign({}, state, {products: action.payload})
+        case CARTSIZE:
+            return Object.assign({}, state, {cartSize: action.payload})
+
 
         case TOTAL:
             return Object.assign({}, state, {total: action.payload})
@@ -40,16 +37,10 @@ export default function reducer(state = initialState, action){
 
 //actions
 
-export function handleCart(value){
+export function handleCartSize(value){
+    console.log('handlecartsize', value)
     return{
-        type: CART,
-        payload: value
-    }
-}
-
-export function handleProducts(value){
-    return{
-        type: PRODUCTS,
+        type: CARTSIZE,
         payload: value
     }
 }

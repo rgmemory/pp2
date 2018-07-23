@@ -1,13 +1,9 @@
 import React, {Component} from 'react'
 import './shopheader.css'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import {handleProducts} from '../../ducks/reducer'
 
-// import './shop.css'
-
-export class Shopheader extends Component{
+export default class Shopheader extends Component{
     constructor(){
         super()
 
@@ -15,14 +11,11 @@ export class Shopheader extends Component{
     }
 
     getFiltered(filter){
-        console.log(filter)
         if(filter == 'all'){
             axios.get('/api/getproducts').then(res => {
-                this.props.handleProducts(res.data)
             })
         }else{
             axios.post('api/getfiltered', {filter}).then(res => {
-                this.props.handleProducts(res.data)
             })
         }
     }
@@ -43,17 +36,3 @@ export class Shopheader extends Component{
         )
     }
 }
-
-
-function mapStateToProps(state){
-    return{
-        cart: state.cart,
-        products: state.cart
-    }
-}
-
-const mapDispatchToProps = {
-    handleProducts
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Shopheader)

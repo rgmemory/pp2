@@ -1,16 +1,26 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 export class Checkout extends Component{
     constructor(){
         super()
 
+        this.state = {
+            cart: []
+        }
+    }
+
+    componentDidMount(){
+        axios.get('/api/getcheckout').then(res => {
+            this.setState({
+                cart: res.data
+            })
+        })
     }
 
     render(){
-
-        console.log('total', this.props.total)
 
         let checkoutItems = this.props.cart.map((current, index) => {
             return(
@@ -37,8 +47,6 @@ export class Checkout extends Component{
             </div>
             <div>IN YOUR CART</div>
                 {checkoutItems}
-                
-               
             </div>
         )
     }
