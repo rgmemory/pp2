@@ -43,6 +43,11 @@
     color: white;
 }
 
+.cart-summary div{
+    /* background-color: black; */
+    color: white;
+}
+
 .cart-product{
     border: solid black 1px;
     height: 250px;

@@ -1,14 +1,14 @@
 //state
 
 const initialState = {
-    cartSize: null,
-    total: null
+    cartSize: 0,
+    subtotal: null
 }
 
 //action types
 
 const CARTSIZE = 'CART'
-const TOTAL = 'TOTAL'
+const SUBTOTAL = 'SUBTOTAL'
 
 
 //reducer
@@ -27,8 +27,8 @@ export default function reducer(state = initialState, action){
             return Object.assign({}, state, {cartSize: action.payload})
 
 
-        case TOTAL:
-            return Object.assign({}, state, {total: action.payload})
+        case SUBTOTAL:
+            return Object.assign({}, state, {subtotal: action.payload})
 
         default: 
             return state
@@ -38,16 +38,16 @@ export default function reducer(state = initialState, action){
 //actions
 
 export function handleCartSize(value){
-    console.log('handlecartsize', value)
     return{
         type: CARTSIZE,
         payload: value
     }
 }
 
-export function handleTotal(value){
+export function handleSubtotal(value){
+    console.log('handlesubtotal', value)
     return{
-        type: TOTAL,
+        type: SUBTOTAL,
         payload: value
     }
 }

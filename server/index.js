@@ -16,6 +16,11 @@ require('dotenv').config()
 //integer doesn't have decimal in sql perhaps use a float
 ///////solve the number reporting on the header. Make sure it doesn't just use redux. update redux whenever a cart change is made
 
+/////why is my cart giving me an error about violating the foreing key constraint.
+
+/////add a column like men's running shoe to the type
+
+///all caps the product names
 let {
     SESSION_SECRET,
     CONNECTION_STRING,
@@ -97,19 +102,26 @@ app.listen(3005, function(){
     console.log('working on 3000')
 })
 
-// app.get('/api/get', controller.getusers)
-
 app.get('/api/getproducts', controller.getproducts)
+
 app.get('/api/getproduct/:id', controller.getproduct)
-
-app.post('/api/getfiltered', controller.getfiltered)
-
 
 app.post('/api/addtocart', controller.addtocart)
 
 app.get('/api/getcheckout', controller.getcheckout)
 
-app.delete('/api/remove/:product_id', controller.remove)
+app.delete('/api/remove/:id', controller.remove)
+
+
+
+// app.get('/api/get', controller.getusers)
+
+
+app.post('/api/getfiltered', controller.getfiltered)
+
+
+
+
 
 // app.post('/api/checkout', controller.checkout)
 
