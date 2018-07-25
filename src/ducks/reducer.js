@@ -1,7 +1,7 @@
 //state
 
 const initialState = {
-    cartSize: 0,
+    cartSize: null,
     subtotal: null
 }
 
@@ -38,6 +38,7 @@ export default function reducer(state = initialState, action){
 //actions
 
 export function handleCartSize(value){
+    console.log('cartsize value on reducer', value)
     return{
         type: CARTSIZE,
         payload: value

@@ -36,13 +36,36 @@ export class Product extends Component{
 
     //////check my ids and user id
     addToCart(product_id, size){
+        axios.post('/api/addtocart', {product_id, size}).then(res => {
+            console.log('cart size', res)
+            axios.get('/api/getcartsize').then(res => {
+                console.log('cart total', res.data)
+                this.props.handleCartSize(res.data)
 
-        console.log('id passed in is', product_id)
-        axios.post('/api/addtocart', {product_id, size, user_id: 2}).then(res => {
-            console.log('new cart data', res.data)
-            this.props.handleCartSize(res.data.length)
+            })
         })
-        /////Maybe use a modal here to show it has been added to the cart
+
+
+
+
+
+        //TODO if user logged in (if we have a userID) use axios call, if not use localstorage
+        
+        // if(localStorage.getItem('cart')){
+        //     let tempCart = JSON.parse(localStorage.getItem('cart'));
+
+        //     tempCart.push({product_id, size});
+
+        //     this.props.handleCartSize(tempCart.length);
+
+        //     localStorage.setItem('cart', JSON.stringify(tempCart));
+
+
+        // }else{
+        //     this.props.handleCartSize(1);
+        //     localStorage.setItem('cart', JSON.stringify([{product_id, size}]))
+        // }
+        
     }
 
     render(){
@@ -52,15 +75,15 @@ export class Product extends Component{
 
                     <div className="product-images">
                         <img src={this.state.product.image}/>
-                        <img src={this.state.product.image}/>
-                        <img src={this.state.product.image}/>
-                        <img src={this.state.product.image}/>
+                        <img src={this.state.product.image2}/>
+                        <img src={this.state.product.image3}/>
+                        <img src={this.state.product.image4}/>
                         
                     </div>
 
                     <div className="product-info">
                         <div className="product-info-top">
-                            <div className="product description">TYPE{this.state.product.description}</div>
+                            <div className="product-type">{this.state.product.type}</div>
                             <div className="product-cost">${this.state.product.cost}</div>
                         </div>
                         
@@ -98,7 +121,7 @@ export class Product extends Component{
                             )}}>ADD TO CART</button>
                         </div>
 
-                        <div className="product description">DESCRIPTION{this.state.product.description}</div>
+                        <div className="product-description"><p>{this.state.product.description}</p></div>
 
                     </div>
                 </div>
@@ -107,6 +130,12 @@ export class Product extends Component{
         )
     }
 }
+
+// export function mapStateToProps(state){
+//     return{
+//         cartSize
+//     }
+// }
 
 const mapDispatchToProps = {
     handleCartSize

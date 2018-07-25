@@ -20,26 +20,44 @@ export class Cart extends Component{
     }
 
     componentDidMount(){
+
+        //take the IDs I have
+        //one by one I need to go through the backend storage and grab the corresponding product
+        //render it here
+
+
+        let cart = JSON.parse(localStorage.getItem('cart'))
+        console.log('tempcart', cart)
+
         
-        axios.get('/api/getcheckout').then(res => {
-            console.log('checkout', res.data)
-
-            let subtotal = 0;
-
-            for(let i = 0; i < res.data.length; i++){
-                // console.log(subtotal)
-                subtotal += res.data[i].cost
-            }
-
-            // console.log(subtotal)
-
-            this.props.handleSubtotal(subtotal)
-
+        axios.post('/api/getcart', {cart}).then(res => {
+            console.log('front end cart', res.data)
             this.setState({
                 cart: res.data
-                
             })
+           
         })
+
+        
+        // axios.get('/api/getcheckout').then(res => {
+        //     console.log('checkout', res.data)
+
+        //     let subtotal = 0;
+
+        //     for(let i = 0; i < res.data.length; i++){
+        //         // console.log(subtotal)
+        //         subtotal += res.data[i].cost
+        //     }
+
+        //     // console.log(subtotal)
+
+        //     this.props.handleSubtotal(subtotal)
+
+        //     this.setState({
+        //         cart: res.data
+                
+        //     })
+        // })
     }
 
     checkout(){
@@ -67,6 +85,8 @@ export class Cart extends Component{
     }
 
     render(){
+
+        
 
         let displayCart = this.state.cart.map((current, index) => {
             return(
@@ -123,7 +143,8 @@ export class Cart extends Component{
 
                             <div>TOTAL: ${this.props.subtotal * 1.06}</div>
 
-                            <Link to="/login" onClick={this.checkout}>CHECKOUT</Link>
+                            {/* <Link to="/userlogin" onClick={this.checkout}>CHECKOUT</Link> */}
+                            {/* <a href="http://localhost:3005/login" >Checkout</a> */}
                         </div>
                     </div>
 

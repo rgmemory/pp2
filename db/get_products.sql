@@ -1,1 +1,2 @@
-select * from nikeproducts;
+select *
+from nikeproducts;

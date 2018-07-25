@@ -44,7 +44,6 @@ app.use(session({
     saveUninitialized: true
 }))
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -68,20 +67,22 @@ passport.use(new Auth0Strategy({
 
 
 passport.serializeUser(function(user, done){
+    console.log(user)
     done(null, user.id)
 })
 
 passport.deserializeUser(function(id, done){  
+    console.log(id)
+
     app.get('db').read_user([id]).then(user => {
         done(null, user); 
     })
 })
 
-
-
 app.get('/login', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000/#/checkout',
-    failureRedirect: 'http://localhost:3000/#/login'
+    // successRedirect: 'http://localhost:3000/#/checkout',
+    successRedirect: 'http://localhost:3000/#/shop',
+    failureRedirect: 'http://localhost:3000/#/userlogin'
 }))
 
 
@@ -112,12 +113,17 @@ app.get('/api/getcheckout', controller.getcheckout)
 
 app.delete('/api/remove/:id', controller.remove)
 
+app.post('/api/getcart', controller.getcart)
+
 
 
 // app.get('/api/get', controller.getusers)
 
 
 app.post('/api/getfiltered', controller.getfiltered)
+
+
+app.get('/api/getcartsize', controller.getcartsize)
 
 
 

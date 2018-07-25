@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import './shop.css'
 import axios from 'axios';
 import {Link} from 'react-router-dom'
+import {handleCartSize} from '../../ducks/reducer'
+import {connect} from 'react-redux'
 
-export default class Shop extends Component{
+
+export class Shop extends Component{
     constructor(){
         super()
 
@@ -13,10 +16,23 @@ export default class Shop extends Component{
     }
     
     componentDidMount(){
+        // axios.get('/api/getproducts').then(res => {
+        //     this.setState({
+        //         products: res.data
+        //     })
+        // })
+
         axios.get('/api/getproducts').then(res => {
             this.setState({
                 products: res.data
             })
+
+            axios.get('/api/getcartsize').then(res => {
+                console.log('cart total', res.data)
+                this.props.handleCartSize(res.data)
+
+            })
+            
         })
     }
 
@@ -27,7 +43,8 @@ export default class Shop extends Component{
                 <div className="shop-products" key={current + index}>
                     <Link to={`/product/${current.id}`}> <div className="shop-products-image"><img src={current.image} /></div>  </Link>
                         <div className="shop-products-name"><p>{current.name}</p></div>
-                        {/* men's running shoe */}
+                        <div className="shop-products-type"><p>{current.type}</p></div>
+                        
                         <div className="shop-products-cost">${current.cost}</div>
                     
                 </div>
@@ -36,8 +53,6 @@ export default class Shop extends Component{
 
         return(
             <div className="shop">
-
-                  
 
                 <div className="shop-wrapper">
                     <div className="shop-title">
@@ -53,3 +68,9 @@ export default class Shop extends Component{
     }
 
 }
+
+const mapDispatchToProps = {
+    handleCartSize
+}
+
+export default connect(null, mapDispatchToProps)(Shop)

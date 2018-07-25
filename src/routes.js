@@ -18,6 +18,6 @@ export default(
         <Route path="/product/:product_id" component={Product}/>
         <Route path="/shop" component={Shop}/>
         <Route path="/checkout" component={Checkout}/>
-        <Route path="/login" component={Login}/>
+        <Route path="/userlogin" component={Login}/>
     </Switch>
 )

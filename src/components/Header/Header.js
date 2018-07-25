@@ -28,8 +28,9 @@ export class Header extends Component{
                 </div>
 
                 <div className="cart-button">
-                    <div classname="cart-image"><Link to="/cart"><img  src={cart}/></Link></div>
+                    <div className="cart-image"><Link to="/cart"><img  src={cart}/></Link></div>
                     <div className="cart-total">{this.props.cartSize}</div>
+                    {/* <div className="cart-total">{JSON.parse(localStorage.getItem('cart')).length}</div> */}
                 </div>
 
 
