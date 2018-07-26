@@ -20,44 +20,21 @@ export class Cart extends Component{
     }
 
     componentDidMount(){
+        axios.get('/api/getcart').then(res => {
+            console.log('cart get mount', res.data)
 
-        //take the IDs I have
-        //one by one I need to go through the backend storage and grab the corresponding product
-        //render it here
+            let subtotal = 0;
 
+            for(let i = 0; i < res.data.length; i++){
+                subtotal += res.data[i].cost;
+            }
 
-        let cart = JSON.parse(localStorage.getItem('cart'))
-        console.log('tempcart', cart)
+            this.props.handleSubtotal(subtotal)
 
-        
-        axios.post('/api/getcart', {cart}).then(res => {
-            console.log('front end cart', res.data)
             this.setState({
                 cart: res.data
             })
-           
         })
-
-        
-        // axios.get('/api/getcheckout').then(res => {
-        //     console.log('checkout', res.data)
-
-        //     let subtotal = 0;
-
-        //     for(let i = 0; i < res.data.length; i++){
-        //         // console.log(subtotal)
-        //         subtotal += res.data[i].cost
-        //     }
-
-        //     // console.log(subtotal)
-
-        //     this.props.handleSubtotal(subtotal)
-
-        //     this.setState({
-        //         cart: res.data
-                
-        //     })
-        // })
     }
 
     checkout(){
@@ -66,13 +43,14 @@ export class Cart extends Component{
 
     remove(value){
         console.log('remove clicked', value)
-        /////////////////////get the delete to work
 
         axios.delete(`/api/remove/${value}`).then(stuff => {
             
-            axios.get('/api/getcheckout').then(res => {
-                console.log(res.data, 'front end checkout', res.data.length)
-                this.props.handleCartSize(res.data.length);
+            axios.get('/api/getcart').then(res => {
+                console.log('cart get mount', res.data)
+
+                this.props.handleCartSize(res.data.length)
+    
                 this.setState({
                     cart: res.data
                 })
@@ -84,9 +62,7 @@ export class Cart extends Component{
         console.log('edit clicked', value)
     }
 
-    render(){
-
-        
+    render(){       
 
         let displayCart = this.state.cart.map((current, index) => {
             return(
@@ -95,24 +71,21 @@ export class Cart extends Component{
                     <div className="cart-product-image"><img src={current.image}></img></div>
                     
                     <div className="cart-product-middle">
-                        <div>IDIDID{current.id}</div>
-                        {/* <div>UserID{current.user_id}</div> */}
+                        {/* <div>{current.id}</div> */}
                     
                         <div className="cart-product-name">{current.name}</div>
-                        <div className="cart-product-size">{current.size}</div>
+                        <div className="cart-product-size">Size: {current.size}</div>
 
                             <div className="cart-product-buttons">
                                 <div className="cart-product-remove"><button onClick={() => this.remove(current.id)}>REMOVE</button></div>
                                 <div className="cart-product-edit"><button onClick={() => this.edit(current.id)}>EDIT</button></div>
                             </div>
-                            
                     </div>
 
                     <div className="cart-product-cost">${current.cost}</div>
                 </div>
             )
         })
-
 
         return(
             <div className="cart">
@@ -137,14 +110,11 @@ export class Cart extends Component{
                     
                             <div>SUMMARY</div>
                             
-                            
                             <div>SUBTOTAL: ${this.props.subtotal}</div>
                             <div>ESITMATED TAXES: ${this.props.subtotal * .06}</div>
 
                             <div>TOTAL: ${this.props.subtotal * 1.06}</div>
-
-                            {/* <Link to="/userlogin" onClick={this.checkout}>CHECKOUT</Link> */}
-                            {/* <a href="http://localhost:3005/login" >Checkout</a> */}
+                            <Link to="/checkout"> Checkout </Link>
                         </div>
                     </div>
 
@@ -165,6 +135,5 @@ const mapDispatchToProps = {
     handleSubtotal,
     handleCartSize
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

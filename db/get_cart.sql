@@ -1,2 +1,5 @@
-select * from nikeproducts 
-where id = $1;
+select *
+from nikeproducts
+join nikecart on
+nikeproducts.id = nikecart.product_id
+where nikecart.user_id = $1;

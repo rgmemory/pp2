@@ -1,12 +1,11 @@
 .checkout{
-    /* color: green; */
-    
+    height: 300vh;    
 }
 
 .checkout-body{
     /* borde; */
     width: 85%;
-    height: 100vh;
+    height: 150vh;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -25,6 +24,7 @@
 .checkout-left{
     border: solid red 1px;
     width: 68%;
+    height: 100vh;
 }
 
 .checkout-right{
@@ -44,14 +44,31 @@
 
 }
 
+.savecontinue button{
+    background-color: #F75722;
+    color: white;
+    height: 40px;
+    width: 140px;
+
+}
+
+.payment{
+    height: 70px;
+    /* width: 100%; */
+    background-color: black;
+    color: white;
+    padding-left: 5%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
 .checkout-left-body{
     border: solid black 1px;
     width: 93%;
-    height: 50%;
+    height: 45vh;
     margin: auto;
 }
-
-
 
 .checkout-names{
     border: solid black 1px;
@@ -63,7 +80,7 @@
 
 .checkout-names input{
     height: 50px;
-    width: 50%;
+    width: 210px;
 }
 
 .checkout-address{
@@ -89,14 +106,113 @@
     width: 100%;
 }
 
-
 .checkout-summary{
+    border: solid black 1px;
+    height: 220px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
+.checkout-summary .title{
+    border: solid green 1px;
     height: 70px;
     background-color: #E5E5E5;
     padding-left: 10%;
     display: flex;
     align-items: center;
 }
+
+.checkout-prices{
+    padding: 15px;
+}
+
+.pricespacing{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.pricespacing1{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.checkout-incart{
+    border: solid black 2px;
+    height: 300px;
+    /* box-sizing: border-box; */
+}
+
+.checkout-incart .in-title{
+    border: solid green 1px;
+    height: 70px;
+    background-color: #E5E5E5;
+    padding-left: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.checkout-items-below{
+    border: solid black 1px;
+    height: 600px;
+}
+
+.checkout-items{
+    display: flex;
+}
+
+.checkout-items-image{
+    border: solid black 1px;
+    height: 100px;
+    width: 100px;
+}
+
+.checkout-items-image img{
+    height: 100px;
+    width: 80px;
+}
+
+.lower-two{
+    border: solid black 1px;
+    height: 100px;
+    width: 220px;
+}
+
+.checkout-items-name{
+    margin: 15px 0;
+}
+
 
 
 

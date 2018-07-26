@@ -113,7 +113,7 @@ app.get('/api/getcheckout', controller.getcheckout)
 
 app.delete('/api/remove/:id', controller.remove)
 
-app.post('/api/getcart', controller.getcart)
+app.get('/api/getcart', controller.getcart)
 
 
 

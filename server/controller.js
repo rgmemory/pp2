@@ -29,7 +29,7 @@ module.exports = {
 
     remove: function(req, res){
         console.log('req.params.product_id', req.params.id)
-        req.app.get('db').remove_product([req.params.id, 2]).then(product => {
+        req.app.get('db').remove_product(req.params.id).then(product => {
             res.status(200).send(product)
         })
 
@@ -54,27 +54,11 @@ module.exports = {
     },
 
     getcart: function(req, res){
-        console.log('req.body', req.body.cart)
+        req.app.get('db').get_cart(req.user[0].id).then(cart => {
+            console.log('cart', cart)
 
-        let tempCart = [];
-
-        for(var i = 0; i < req.body.cart.length; i++){
-            console.log('param', req.body.cart[i].product_id)
-            let x = req.app.get('db').get_cart(req.body.cart[i].product_id);
-
-            tempCart.push(x);
-        }
-
-        Promise.all(tempCart).then(cart => {
-            for(let i = 0; i < cart.length; i++){
-                cart[i] = cart[i][0];
-            }
-            res.send(cart)
+            res.status(200).send(cart)
         })
-
-        // console.log('tempCart', tempCart)
-        // res.send(tempCart)
-
 
     },
 
