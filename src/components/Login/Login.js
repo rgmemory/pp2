@@ -14,7 +14,8 @@ export default class Login extends Component{
         return(
             <div className="login">
                 {/* <Link to="/api/login">Login</Link> */}
-                <a href="http://localhost:3005/login" >Login</a>
+                {/* <a href="http://localhost:3005/login" >Login</a> */}
+                <a href={`${window.origin}/login`} >Login</a>
             </div>
         )
     }

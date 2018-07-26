@@ -14,7 +14,7 @@ export default class Home extends Component{
             <div className="home">
                 <div className="home-margin">
 
-                <div class="start"><a href="http://localhost:3005/login" >Start Shopping</a></div>
+                <div class="start"><a href={`${window.origin}/login`} >Start Shopping</a></div>
 
 
                 {/* <video preload="true" loop="loop" muted="true"> */}

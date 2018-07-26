@@ -80,7 +80,10 @@
 }
 
 .cart-product-buttons{
+    width: 250px;
     border: solid black 1px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .cart-product-name{

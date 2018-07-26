@@ -27,7 +27,8 @@ let {
     DOMAIN,
     CLIENT_ID,
     CLIENT_SECRET,
-    CALLBACK_URL
+    CALLBACK_URL,
+    FRONTEND_DOMAIN
 } = process.env
 
 const app = express();
@@ -80,9 +81,10 @@ passport.deserializeUser(function(id, done){
 })
 
 app.get('/login', passport.authenticate('auth0', {
-    // successRedirect: 'http://localhost:3000/#/checkout',
-    successRedirect: 'http://localhost:3000/#/shop',
-    failureRedirect: 'http://localhost:3000/#/userlogin'
+    // successRedirect: 'http://localhost:3000/#/shop',
+    // failureRedirect: 'http://localhost:3000/#/userlogin'
+    successRedirect:    `${process.env.FRONTEND_DOMAIN}/#/shop`,
+    failureRedirect: `${process.env.FRONTEND_DOMAIN}/#/userlogin`
 }))
 
 
