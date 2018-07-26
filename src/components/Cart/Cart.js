@@ -74,6 +74,7 @@ export class Cart extends Component{
                         {/* <div>{current.id}</div> */}
                     
                         <div className="cart-product-name">{current.name}</div>
+                        <div className="cart-product-name">{current.type}</div>
                         <div className="cart-product-size">Size: {current.size}</div>
 
                             <div className="cart-product-buttons">
@@ -108,13 +109,24 @@ export class Cart extends Component{
                     <div className="cart-right">
                         <div className="cart-summary">
                     
-                            <div>SUMMARY</div>
+                            <div className="cart-summary-title">SUMMARY</div>
                             
-                            <div>SUBTOTAL: ${this.props.subtotal}</div>
-                            <div>ESITMATED TAXES: ${this.props.subtotal * .06}</div>
+                            <div className="pricespacing cart-underline">
+                                <div className="cart-subtotal">Subtotal</div>
+                                <div>${this.props.subtotal}</div>
+                            </div>
 
-                            <div>TOTAL: ${this.props.subtotal * 1.06}</div>
-                            <Link to="/checkout"> Checkout </Link>
+                            <div className="pricespacing cart-underline">
+                                <div className="cart-tax">Estimated Tax</div>
+                                <div>${this.props.subtotal * .06}</div>
+                            </div>
+
+                            <div className="pricespacing">
+                                <div className="cart-total1">Total</div>
+                                <div>${this.props.subtotal * 1.06}</div>
+                            </div>
+
+                            <div className="cart-checkout"><Link to="/checkout"> <button> Checkout </button> </Link></div>
                         </div>
                     </div>
 
