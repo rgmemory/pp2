@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const massive = require('massive')
 
+
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const session = require('express-session')
@@ -21,6 +22,18 @@ require('dotenv').config()
 /////add a column like men's running shoe to the type
 
 ///all caps the product names
+
+var stripe = require("stripe")("sk_test_agkHO99WVkWu6hDrSPZqkZJz");
+
+
+const charge = stripe.charges.create({
+  amount: 999,
+  currency: 'usd',
+  source: 'tok_visa',
+  receipt_email: 'jenny.rosen@example.com',
+});
+
+
 let {
     SESSION_SECRET,
     CONNECTION_STRING,
@@ -129,6 +142,8 @@ app.post('/api/getfiltered', controller.getfiltered)
 
 
 app.get('/api/getcartsize', controller.getcartsize)
+
+app.post('/api/payment', controller.payment)
 
 
 

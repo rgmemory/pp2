@@ -10,7 +10,7 @@ export class Cart extends Component{
         super()
 
        this.state = {
-           cart: [],
+           cart: []
        }
 
        this.checkout = this.checkout.bind(this)
@@ -48,6 +48,20 @@ export class Cart extends Component{
             
             axios.get('/api/getcart').then(res => {
                 console.log('cart get mount', res.data)
+
+                let subtotal = 0;
+
+                for(let i = 0; i < res.data.length; i++){
+                    subtotal += res.data[i].cost;
+                }
+
+                
+
+                // subtotal = parseFloat(Math.round(subtotal * 100) / 100).toFixed(2);
+                // total = parseFloat(Math.round(total * 100) / 100).toFixed(2);
+
+
+                this.props.handleSubtotal(subtotal)
 
                 this.props.handleCartSize(res.data.length)
     
@@ -113,17 +127,17 @@ export class Cart extends Component{
                             
                             <div className="pricespacing cart-underline">
                                 <div className="cart-subtotal">Subtotal</div>
-                                <div>${this.props.subtotal}</div>
+                                <div>${parseFloat(Math.round((this.props.subtotal) * 100) / 100).toFixed(2)}</div>
                             </div>
 
                             <div className="pricespacing cart-underline">
                                 <div className="cart-tax">Estimated Tax</div>
-                                <div>${this.props.subtotal * .06}</div>
+                                <div>${parseFloat(Math.round((this.props.subtotal * .06) * 100) / 100).toFixed(2)}</div>
                             </div>
 
                             <div className="pricespacing">
                                 <div className="cart-total1">Total</div>
-                                <div>${this.props.subtotal * 1.06}</div>
+                                <div>${parseFloat(Math.round((this.props.subtotal * 1.06) * 100) / 100).toFixed(2)}</div>
                             </div>
 
                             <div className="cart-checkout"><Link to="/checkout"> <button> Checkout </button> </Link></div>

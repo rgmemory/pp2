@@ -26,6 +26,7 @@
 
 .shop-products{
     /* border: solid black 1px; */
+    padding: 3px;
     text-decoration: none;
     height: 550px;
     width: 360px;
@@ -35,6 +36,7 @@
 .shop-products:hover{
     border: solid black 1px;
     box-sizing: border-box;
+    box-shadow: 1px 1px 5px 3px #ccc
     
 }
 

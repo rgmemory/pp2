@@ -4,7 +4,7 @@ module.exports = {
         req.app.get('db').get_products().then(products => {
             res.status(200).send(products)
         })
-        console.log('req.user', req.user[0])
+        // console.log('req.user', req.user[0])
     },
 
     
@@ -15,7 +15,7 @@ module.exports = {
     },
 
     addtocart: function(req, res){
-        console.log('add to cart req.body', req.user[0].id, req.body.product_id, req.body.size)
+        // console.log('add to cart req.body', req.user[0].id, req.body.product_id, req.body.size)
         req.app.get('db').add_to_cart([req.user[0].id, req.body.product_id, req.body.size]).then(stuff => {
             res.sendStatus(200);
         })
@@ -28,7 +28,7 @@ module.exports = {
     },
 
     remove: function(req, res){
-        console.log('req.params.product_id', req.params.id)
+        // console.log('req.params.product_id', req.params.id)
         req.app.get('db').remove_product(req.params.id).then(product => {
             res.status(200).send(product)
         })
@@ -55,7 +55,7 @@ module.exports = {
 
     getcart: function(req, res){
         req.app.get('db').get_cart(req.user[0].id).then(cart => {
-            console.log('cart', cart)
+            // console.log('cart', cart)
 
             res.status(200).send(cart)
         })
@@ -63,12 +63,18 @@ module.exports = {
     },
 
     getcartsize: function(req, res){
-        console.log('get cart size works', req.user[0].id)
+        // console.log('get cart size works', req.user[0].id)
 
         req.app.get('db').get_cart_size(req.user[0].id).then(cart => {
-            console.log('cart total', cart.count)
+            // console.log('cart total', cart.count)
             res.status(200).send(cart[0].count)
         })
+    }, 
+
+    payment: function(req, res){
+        console.log('payment', req.body)
+
+        res.sendStatus(200);
     }
 
 

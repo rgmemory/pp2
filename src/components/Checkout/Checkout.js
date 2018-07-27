@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import './checkout.css'
+import StripeCheckout from 'react-stripe-checkout';
 
 export class Checkout extends Component{
     constructor(){
@@ -59,6 +60,13 @@ export class Checkout extends Component{
         console.log(value)
     }
 
+    onToken = (token) => {
+        token.card = void 0
+        axios.post('/api/payment', {token, amount: ((this.props.subtotal * 1.06) * 100)}).then(res => {
+            console.log('front end token', res)
+        })
+    }
+
     render(){
 
         let checkoutItems = this.state.cart.map((current, index) => {
@@ -77,6 +85,9 @@ export class Checkout extends Component{
         
         return(
             <div className="checkout">
+            
+            
+                
 
                     <div className="checkout-title"><h1>CHECKOUT</h1></div>
 
@@ -106,7 +117,7 @@ export class Checkout extends Component{
                             </div>      
 
                             <div className="savecontinue">
-                                <button>SAVE & CONTINUE</button>
+                                <button>SAVE</button>
                             </div>                      
 
                         </div>
@@ -114,6 +125,20 @@ export class Checkout extends Component{
                         <div className="payment">2.PAYMENT
                             
                         </div>
+
+                        <div className="stripe">
+                            <StripeCheckout 
+                                name="Russ Buss"
+                                description="dola bills"
+                                image="http://via.placeholder.com/100x100"
+                                token={this.onToken}
+                                stripeKey="pk_test_6xbuzwaF1SPcu8L2FclNKkb4"
+                                // amount={parseFloat(Math.round((this.props.subtotal * 1.06) * 100) / 100).toFixed(2)}
+                                amount={(this.props.subtotal * 1.06) * 100}                                
+                            />
+                        </div>
+
+
 
                     </div>
 
@@ -128,17 +153,17 @@ export class Checkout extends Component{
 
                             <div className="pricespacing">
                                 <div className="checkout-subtotal">Subtotal</div>
-                                <div>${this.props.subtotal}</div>
+                                <div>${parseFloat(Math.round((this.props.subtotal) * 100) / 100).toFixed(2)}</div>
                             </div>
 
                             <div className="pricespacing">
                                 <div className="checkout-tax">Estimated Tax</div>
-                                <div>${this.props.subtotal * .06}</div>
+                                <div>${parseFloat(Math.round((this.props.subtotal * .06) * 100) / 100).toFixed(2)}</div>
                             </div>
 
                             <div className="pricespacing1">
                                 <div className="checkout-total">Total</div>
-                                <div>${this.props.subtotal * 1.06}</div>
+                                <div>${parseFloat(Math.round((this.props.subtotal * 1.06) * 100) / 100).toFixed(2)}</div>
                             </div>
                         </div>
 

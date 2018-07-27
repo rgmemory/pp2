@@ -35,9 +35,10 @@ export default class Shopheader extends Component{
                 </div>
 
                 <div className="shopheader-links">
-                    <button onClick={() => {this.getFiltered('all')}}>All</button>
-                    <button onClick={() => {this.getFiltered('acc')}}>Accesories</button>
-                    <button onClick={() => {this.getFiltered('shoes')}}>Shoes</button>
+                    <Link to="/shop"> <button onClick={() => {this.getFiltered('all')}}>Men's</button> </Link>
+                    <button onClick={() => {this.getFiltered('all')}}>Womens</button>
+                    <button onClick={() => {this.getFiltered('acc')}}>Kids</button>
+                    <button onClick={() => {this.getFiltered('shoes')}}>Favorites</button>
                 </div>
 
                 <div className="shopheader-search">

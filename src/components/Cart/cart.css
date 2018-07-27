@@ -1,5 +1,5 @@
 .cart{
-    height: 250vh;
+    height: 200vh;
 }
 
 .cart-wrapper{
@@ -28,7 +28,7 @@
 }
 
 .cart-left-deal{
-    background-color: #EEEEEE;
+    background-color: black;
     height: 80px;
     width: 100%;
     margin-bottom: 20px;
@@ -44,7 +44,7 @@
 }
 
 .cart-your-cart{
-    background-color: #EEEEEE;
+    background-color: black;
     height: 80px;
     width: 100%;
     display: flex;
@@ -52,6 +52,7 @@
     padding-left: 30px;
     font-size: 20px;
     box-sizing: border-box;
+    color: white;
 }
 
 .cart-summary{
@@ -118,7 +119,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
-    box-shadow:         3px 3px 5px 1px #ccc
+    box-shadow: 1px 1px 5px 1px #ccc
 }
 
 .cart-product-image{
