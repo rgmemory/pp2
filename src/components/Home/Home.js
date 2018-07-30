@@ -44,7 +44,7 @@ export default class Home extends Component{
                         <button>SHOP NOW</button>
                         
                 </div> */}
-                    <video  loop="loop" width="1500" >
+                    <video autoPlay="autoplay" loop="loop" width="1500" >
                     {/* <video  loop="loop" width="1500" > */}
                         <source src="https://nikevideo.nike.com/72451143001/201807/1648/72451143001_5812736391001_5812734287001.mp4" type="video/mp4"/>
                     </video>

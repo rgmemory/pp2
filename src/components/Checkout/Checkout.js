@@ -77,6 +77,11 @@ export class Checkout extends Component{
         token.card = void 0
         axios.post('/api/payment', {token, amount: ((this.props.subtotal * 1.06) * 100)}).then(res => {
             console.log('front end token', res)
+
+            // if(res.data === 'OK'){
+            //     alert('thanks for your order')
+                
+            // }
         })
     }
 

@@ -146,6 +146,10 @@ app.post('/api/updatesize', controller.updatesize)
 
 app.post('/api/updateuserinformation', controller.updateuserinformation)
 
+app.post('/api/payment', controller.handlePayment)
+
+
+
 
 
 

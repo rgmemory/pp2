@@ -92,6 +92,27 @@ module.exports = {
         req.app.get('db').update_user_info([first, last, address, city, state, zip]).then(result => {
             console.log('user info updated')
         })
+    },
+
+    handlePayment: (req, res) => {
+        const { amount, token:{id}} = req.body
+        stripe.charges.create(
+            {
+                amount: amount,
+                currency: "usd",
+                source: id,
+                description: "Test charge from Travis"
+            },
+            (err, charge) => {
+                if(err) {
+                    console.log(err)
+                    return res.status(500).send(err)
+                } else {
+                    console.log("charge", charge)
+                    return res.status(200).send(charge)
+                }
+            }
+        )
     }
 
 
