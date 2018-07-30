@@ -12,16 +12,11 @@ require('dotenv').config()
 //nikeusers
 //nikeproducts
 //nikecart
+//nikecustomers
 
-
-//integer doesn't have decimal in sql perhaps use a float
-///////solve the number reporting on the header. Make sure it doesn't just use redux. update redux whenever a cart change is made
-
-/////why is my cart giving me an error about violating the foreing key constraint.
-
-/////add a column like men's running shoe to the type
-
-///all caps the product names
+//resolve the edit cart
+//get address input to work
+//cart size not working?
 
 var stripe = require("stripe")("sk_test_agkHO99WVkWu6hDrSPZqkZJz");
 
@@ -84,12 +79,12 @@ passport.use(new Auth0Strategy({
 
 
 passport.serializeUser(function(user, done){
-    console.log(user)
+    // console.log(user)
     done(null, user.id)
 })
 
 passport.deserializeUser(function(id, done){  
-    console.log(id)
+    // console.log(id)
 
     app.get('db').read_user([id]).then(user => {
         done(null, user); 
@@ -144,6 +139,12 @@ app.post('/api/getfiltered', controller.getfiltered)
 app.get('/api/getcartsize', controller.getcartsize)
 
 app.post('/api/payment', controller.payment)
+
+app.get('/api/getedit/:id', controller.getedit)
+
+app.post('/api/updatesize', controller.updatesize)
+
+app.post('/api/updateuserinformation', controller.updateuserinformation)
 
 
 

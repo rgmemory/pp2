@@ -1,27 +1,30 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {handleSubtotal, handleCartSize} from '../../ducks/reducer'
+import {handleSubtotal, handleCartSize, handleShoeSize, handleeditCart} from '../../ducks/reducer'
 import {Link} from 'react-router-dom'
 import './cart.css'
 import axios from 'axios'
+import Editmodal from '../Editmodal/Editmodal'
 
 export class Cart extends Component{
     constructor(){
         super()
 
        this.state = {
-           cart: []
+           cart: [],
+           showModal: false
        }
 
        this.checkout = this.checkout.bind(this)
        this.remove = this.remove.bind(this)
        this.edit = this.edit.bind(this)
+       this.updateCart = this.updateCart.bind(this)
 
     }
 
     componentDidMount(){
         axios.get('/api/getcart').then(res => {
-            console.log('cart get mount', res.data)
+            // console.log('cart get mount', res.data)
 
             let subtotal = 0;
 
@@ -41,6 +44,50 @@ export class Cart extends Component{
         console.log('checkout clicked')
     }
 
+    showModal = (value) => {
+
+        // console.log('showmodal should be product id', value)
+
+        axios.get(`/api/getedit/${value}`).then(res => {
+            // console.log('getedit front end', res.data[0])
+
+            this.props.handleeditCart(res.data[0])
+        })
+
+        this.setState({
+            showModal: true
+        })
+    }
+
+    closeModal = () => {
+        this.props.handleeditCart([{}])
+
+        this.setState({
+            showModal: false
+        })
+
+    }
+
+    updateCart(){
+        console.log('cart udpated')
+
+        axios.get('/api/getcart').then(res => {
+            console.log('cart get mount', res.data)
+
+            let subtotal = 0;
+
+            for(let i = 0; i < res.data.length; i++){
+                subtotal += res.data[i].cost;
+            }
+
+            this.props.handleSubtotal(subtotal)
+
+            this.setState({
+                cart: res.data
+            })
+        })
+    }
+
     remove(value){
         console.log('remove clicked', value)
 
@@ -54,8 +101,6 @@ export class Cart extends Component{
                 for(let i = 0; i < res.data.length; i++){
                     subtotal += res.data[i].cost;
                 }
-
-                
 
                 // subtotal = parseFloat(Math.round(subtotal * 100) / 100).toFixed(2);
                 // total = parseFloat(Math.round(total * 100) / 100).toFixed(2);
@@ -93,7 +138,7 @@ export class Cart extends Component{
 
                             <div className="cart-product-buttons">
                                 <div className="cart-product-remove"><button onClick={() => this.remove(current.id)}>REMOVE</button></div>
-                                <div className="cart-product-edit"><button onClick={() => this.edit(current.id)}>EDIT</button></div>
+                                <div className="cart-product-edit"><button onClick={() => this.showModal(current.id)}>EDIT</button></div>
                             </div>
                     </div>
 
@@ -102,8 +147,18 @@ export class Cart extends Component{
             )
         })
 
+        // console.log('props.cart', this.props.cart)
+
         return(
             <div className="cart">
+
+            {/* <button onClick={this.showModal}>Show Modal</button> */}
+        
+            {
+                this.state.showModal &&
+                <Editmodal close={this.closeModal} updateCart={this.updateCart}/>
+            }
+
                 <div className="cart-wrapper">
 
                     <div className="cart-left">
@@ -112,7 +167,7 @@ export class Cart extends Component{
 
                         </div>
                         <div className="cart-your-cart">
-                            <p>YOUR CART ({this.props.cartSize})</p>
+                            <p>YOUR CART ( {this.props.cartSize} )</p>
                         </div>
                         
                         <div className="cart-items">
@@ -153,13 +208,16 @@ export class Cart extends Component{
 function mapStateToProps(state){
     return{
         cartSize: state.cartSize,
-        subtotal: state.subtotal
+        subtotal: state.subtotal,
+        cart: state.cart
     }
 }
 
 const mapDispatchToProps = {
     handleSubtotal,
-    handleCartSize
+    handleCartSize,
+    handleShoeSize,
+    handleeditCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

@@ -37,9 +37,9 @@ export class Product extends Component{
     //////check my ids and user id
     addToCart(product_id, size){
         axios.post('/api/addtocart', {product_id, size}).then(res => {
-            console.log('cart size', res)
+            // console.log('cart size', res)
             axios.get('/api/getcartsize').then(res => {
-                console.log('cart total', res.data)
+                // console.log('cart total', res.data)
                 this.props.handleCartSize(res.data)
 
             })

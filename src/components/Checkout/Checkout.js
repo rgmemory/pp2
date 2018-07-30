@@ -16,7 +16,7 @@ export class Checkout extends Component{
             address: 'Address',
             city: 'City', 
             state: 'State',
-            zip: null
+            zip: 'Zip Code'
         }
 
         this.handleFirst = this.handleFirst.bind(this)
@@ -25,6 +25,7 @@ export class Checkout extends Component{
         this.handleCity = this.handleCity.bind(this)
         this.handleState = this.handleState.bind(this)
         this.handleZip = this.handleZip.bind(this)
+        this.updatePersonalInformation = this.updatePersonalInformation.bind(this)
     }
 
     componentDidMount(){
@@ -37,33 +38,53 @@ export class Checkout extends Component{
     }
 
     handleFirst(value){
-        console.log(value)
+        this.setState({
+            first: value
+        })
     }
 
     handleLast(value){
-        console.log(value)
+        this.setState({
+            last: value
+        })
     }
 
     handleAddress(value){
-        console.log(value)
+        this.setState({
+            address: value
+        })
     }
 
     handleCity(value){
-        console.log(value)
+        this.setState({
+            city: value
+        })
     }
 
     handleState(value){
-        console.log(value)
+        this.setState({
+            state: value
+        })
     }
 
     handleZip(value){
-        console.log(value)
+        this.setState({
+            zip: value
+        })
     }
 
     onToken = (token) => {
         token.card = void 0
         axios.post('/api/payment', {token, amount: ((this.props.subtotal * 1.06) * 100)}).then(res => {
             console.log('front end token', res)
+        })
+    }
+
+    updatePersonalInformation(){
+
+        let {first, last, address, city, state, zip} = this.state
+        axios.post('/api/updateuserinformation', {first, last, address, city, state, zip}).then(res => {
+            console.log('personal information udpated')
         })
     }
 
@@ -103,21 +124,21 @@ export class Checkout extends Component{
 
                             {/* fix the values on the inputs */}
                             <div className="checkout-names">
-                                <div className="checkout-first"><input onChange={e => this.handleFirst(e.target.value)} type="text" /></div>
-                                <div className="checkout-last"><input onChange={e => this.handleLast(e.target.value)} type="text" value="Last"/></div>
+                                <div className="checkout-first"><input onChange={e => this.handleFirst(e.target.value)} type="text" value={this.state.first}/></div>
+                                <div className="checkout-last"><input onChange={e => this.handleLast(e.target.value)} type="text" value={this.state.last}/></div>
                             </div>
 
-                            <div className="checkout-address"><input onChange={e => this.handleAddress(e.target.value)} type="text" value="Address"/></div>
+                            <div className="checkout-address"><input onChange={e => this.handleAddress(e.target.value)} type="text" value={this.state.address}/></div>
                             
                             <div className="checkout-address-info">
-                                <div className="checkout-city"><input onChange={e => this.handleCity(e.target.value)} type="text" value="City"/></div>
-                                <div className="checkout-state"><input onChange={e => this.handleState(e.target.value)} type="text" value="State"/></div>
-                                <div className="checkout-postal"><input onChange={e => this.handleZip(e.target.value)} type="text" value="Postal Code"/></div>
+                                <div className="checkout-city"><input onChange={e => this.handleCity(e.target.value)} type="text" value={this.state.city}/></div>
+                                <div className="checkout-state"><input onChange={e => this.handleState(e.target.value)} type="text" value={this.state.state}/></div>
+                                <div className="checkout-postal"><input onChange={e => this.handleZip(e.target.value)} type="text" value={this.state.zip}/></div>
 
                             </div>      
 
                             <div className="savecontinue">
-                                <button>SAVE</button>
+                                <button onClick={this.updatePersonalInformation}>SAVE</button>
                             </div>                      
 
                         </div>
@@ -128,8 +149,8 @@ export class Checkout extends Component{
 
                         <div className="stripe">
                             <StripeCheckout 
-                                name="Russ Buss"
-                                description="dola bills"
+                                name="Nike"
+                                description="Dolla Dolla Bills"
                                 image="http://via.placeholder.com/100x100"
                                 token={this.onToken}
                                 stripeKey="pk_test_6xbuzwaF1SPcu8L2FclNKkb4"

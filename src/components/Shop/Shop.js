@@ -28,7 +28,7 @@ export class Shop extends Component{
             })
 
             axios.get('/api/getcartsize').then(res => {
-                console.log('cart total', res.data)
+                // console.log('cart total', res.data)
                 this.props.handleCartSize(res.data)
 
             })

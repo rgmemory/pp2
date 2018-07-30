@@ -4,7 +4,6 @@ module.exports = {
         req.app.get('db').get_products().then(products => {
             res.status(200).send(products)
         })
-        // console.log('req.user', req.user[0])
     },
 
     
@@ -15,7 +14,6 @@ module.exports = {
     },
 
     addtocart: function(req, res){
-        // console.log('add to cart req.body', req.user[0].id, req.body.product_id, req.body.size)
         req.app.get('db').add_to_cart([req.user[0].id, req.body.product_id, req.body.size]).then(stuff => {
             res.sendStatus(200);
         })
@@ -28,7 +26,6 @@ module.exports = {
     },
 
     remove: function(req, res){
-        // console.log('req.params.product_id', req.params.id)
         req.app.get('db').remove_product(req.params.id).then(product => {
             res.status(200).send(product)
         })
@@ -55,7 +52,6 @@ module.exports = {
 
     getcart: function(req, res){
         req.app.get('db').get_cart(req.user[0].id).then(cart => {
-            // console.log('cart', cart)
 
             res.status(200).send(cart)
         })
@@ -63,18 +59,39 @@ module.exports = {
     },
 
     getcartsize: function(req, res){
-        // console.log('get cart size works', req.user[0].id)
 
         req.app.get('db').get_cart_size(req.user[0].id).then(cart => {
-            // console.log('cart total', cart.count)
             res.status(200).send(cart[0].count)
         })
     }, 
 
     payment: function(req, res){
-        console.log('payment', req.body)
 
         res.sendStatus(200);
+    },
+
+    getedit: function(req, res){
+        req.app.get('db').get_edit(req.params.id).then(item => {
+
+            res.status(200).send(item)
+        })
+    },
+
+    updatesize: function(req, res){
+        console.log('req.body', req.body)
+        req.app.get('db').update_size([req.body.size, req.body.id]).then(item => {
+            res.status(200).send(item)
+        })
+    },
+
+    updateuserinformation: function(req, res){
+        console.log("user info", req.body)
+
+        let {first, last, address, city, state, zip} = req.body
+
+        req.app.get('db').update_user_info([first, last, address, city, state, zip]).then(result => {
+            console.log('user info updated')
+        })
     }
 
 
