@@ -5,7 +5,6 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {handleeditCart, handleClearEditCart} from '../../ducks/reducer'
 
-
 export class Editmodal extends Component{
 
     constructor(){
@@ -21,30 +20,18 @@ export class Editmodal extends Component{
     }   
 
     componentDidMount(){
-
-        // this.setState({
-        //     cart: this.props.editCart
-        // })
-        
-
         console.log('props.cart', this.props.editCart)
-        // console.log('state.cart', this.state.cart)
     }
 
     handleSize(value){
-        console.log('new size', value)
         this.setState({
             size: value
         })
     }
 
     updateSize(){
-
-        console.log('update size clicked new size is', this.state.size)
         axios.post('/api/updatesize', {size: this.state.size, id: this.props.editCart[0].id}).then(res => {
-            console.log('front end update size', res.data)
             this.props.updateCart();
-            // this.props.handleeditCart([])
             this.props.handleClearEditCart();
             this.props.close()
         })
@@ -94,12 +81,9 @@ export class Editmodal extends Component{
             )
         })
 
-        // console.log('cart in body', this.props.cart)
-
         return(
             <div className="overlay"> 
                 <div className="modal-box">
-                    {/* <button onClick={this.props.close}>Close Modal</button> */}
                     
                     <div className="x-button">
                         <button onClick={this.props.close}>
@@ -117,7 +101,6 @@ export class Editmodal extends Component{
         )
     }
 }
-
 
 function mapStateToProps(state){
     return{

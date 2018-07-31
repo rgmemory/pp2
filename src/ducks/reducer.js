@@ -19,19 +19,12 @@ const clearEditCart = 'clearEditCart'
 
 //reducer
 
-///use slice to copy the card and add the new item
 
 export default function reducer(state = initialState, action){
     switch(action.type){
 
-        // case CART:
-        //     let tempCart = state.cart.slice(0);
-        //     tempCart.push(action.payload)
-        //     return Object.assign({}, state, {cart: tempCart})///copied cart Plus the new 
-
         case CARTSIZE:
             return Object.assign({}, state, {cartSize: action.payload})
-
 
         case SUBTOTAL:
             return Object.assign({}, state, {subtotal: action.payload})
@@ -55,7 +48,6 @@ export default function reducer(state = initialState, action){
 //actions
 
 export function handleCartSize(value){
-    // console.log('cartsize value on reducer', value)
     return{
         type: CARTSIZE,
         payload: value
@@ -63,7 +55,6 @@ export function handleCartSize(value){
 }
 
 export function handleSubtotal(value){
-    // console.log('handlesubtotal', value)
     return{
         type: SUBTOTAL,
         payload: value
@@ -71,7 +62,6 @@ export function handleSubtotal(value){
 }
 
 export function handleShoeSize(value){
-    console.log('handleShoeSize', value)
     return{
         type: SHOESIZE,
         payload: value
@@ -79,7 +69,6 @@ export function handleShoeSize(value){
 }
 
 export function handleeditCart(value){
-    // console.log('editCart', value)
     return{
         type: editCart,
         payload: value
@@ -87,7 +76,6 @@ export function handleeditCart(value){
 }
 
 export function handleClearEditCart(){
-    // console.log('editCart', value)
     return{
         type: clearEditCart
         

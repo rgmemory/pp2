@@ -30,7 +30,6 @@ export class Checkout extends Component{
 
     componentDidMount(){
         axios.get('/api/getcart').then(res => {
-            console.log('checklist', res.data)
             this.setState({
                 cart: res.data
             })
@@ -77,19 +76,14 @@ export class Checkout extends Component{
         token.card = void 0
         axios.post('/api/payment', {token, amount: ((this.props.subtotal * 1.06) * 100)}).then(res => {
             console.log('front end token', res)
-
-            // if(res.data === 'OK'){
-            //     alert('thanks for your order')
-                
-            // }
         })
     }
 
     updatePersonalInformation(){
 
         let {first, last, address, city, state, zip} = this.state
+
         axios.post('/api/updateuserinformation', {first, last, address, city, state, zip}).then(res => {
-            console.log('personal information udpated')
         })
     }
 
@@ -153,7 +147,6 @@ export class Checkout extends Component{
                                 image="http://via.placeholder.com/100x100"
                                 token={this.onToken}
                                 stripeKey="pk_test_6xbuzwaF1SPcu8L2FclNKkb4"
-                                // amount={parseFloat(Math.round((this.props.subtotal * 1.06) * 100) / 100).toFixed(2)}
                                 amount={(this.props.subtotal * 1.06) * 100}                                
                             />
                         </div>
@@ -198,9 +191,6 @@ export class Checkout extends Component{
                             </div>
                             
                         </div>
-                        
-                        
-                            
                     </div>
                 </div>
             

@@ -16,11 +16,6 @@ export class Shop extends Component{
     }
     
     componentDidMount(){
-        // axios.get('/api/getproducts').then(res => {
-        //     this.setState({
-        //         products: res.data
-        //     })
-        // })
 
         axios.get('/api/getproducts').then(res => {
             this.setState({
@@ -28,11 +23,8 @@ export class Shop extends Component{
             })
 
             axios.get('/api/getcartsize').then(res => {
-                // console.log('cart total', res.data)
                 this.props.handleCartSize(res.data)
-
             })
-            
         })
     }
 
@@ -46,7 +38,6 @@ export class Shop extends Component{
                         <div className="shop-products-type"><p>{current.type}</p></div>
                         
                         <div className="shop-products-cost">${current.cost}</div>
-                    
                 </div>
             )
         })

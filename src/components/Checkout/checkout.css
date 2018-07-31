@@ -3,23 +3,19 @@
 }
 
 .checkout-body{
-    /* borde; */
     width: 85%;
     height: 150vh;
     margin: auto;
     display: flex;
     justify-content: space-between;
-    /* border: solid black 1px; */
 }
 
 .checkout-title{
-    /* border: solid orange 1px; */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 70px;
     font-size: 30px;
-    /* width: 100%; */
 }
 
 .checkout-left{
@@ -29,20 +25,17 @@
 }
 
 .checkout-right{
-    /* border: solid purple 1px; */
     width: 28%;
 }
 
 .checkout-shipping{
     height: 70px;
-    /* width: 100%; */
     background-color: black;
     color: white;
     padding-left: 5%;
     display: flex;
     align-items: center;
     margin-bottom: 25px;
-
 }
 
 .savecontinue{
@@ -57,12 +50,10 @@
     width: 160px;
     border-radius: 3px;
     margin-top: 20px;
-
 }
 
 .payment{
     height: 70px;
-    /* width: 100%; */
     background-color: black;
     color: white;
     padding-left: 5%;
@@ -72,14 +63,12 @@
 }
 
 .checkout-left-body{
-    /* border: solid black 1px; */
     width: 93%;
     height: 45vh;
     margin: auto;
 }
 
 .checkout-names{
-    /* border: solid black 1px; */
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -92,7 +81,6 @@
 }
 
 .checkout-address{
-    /* border: solid black 1px; */
     margin-bottom: 20px;
 }
 
@@ -102,7 +90,6 @@
 }
 
 .checkout-address-info{
-    /* border: solid black 1px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -123,7 +110,6 @@
 
 
 .checkout-summary .title{
-    /* border: solid green 1px; */
     height: 70px;
     background-color: #E5E5E5;
     padding-left: 10%;
@@ -150,7 +136,6 @@
 .checkout-incart{
     border: solid #E5E5E5 .5px;
     margin-top: 25px;
-    /* padding: 10px; */
 }
 
 .stripe{
@@ -158,33 +143,11 @@
     justify-content: center;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .checkout-incart{
-    /* border: solid black 2px; */
     height: 400px;
-    /* box-sizing: border-box; */
 }
 
 .checkout-incart .in-title{
-    /* border: solid green 1px; */
     height: 70px;
     background-color: #E5E5E5;
     padding-left: 10%;
@@ -193,7 +156,6 @@
 }
 
 .checkout-items-below{
-    /* border: solid black 1px; */
     height: 600px;
     padding: 2px 3px;;
 }
@@ -203,7 +165,6 @@
 }
 
 .checkout-items-image{
-    /* border: solid black 1px; */
     height: 100px;
     width: 100px;
 }
@@ -214,7 +175,6 @@
 }
 
 .lower-two{
-    /* border: solid black 1px; */
     height: 100px;
     width: 220px;
 }
@@ -222,10 +182,3 @@
 .checkout-items-name{
     margin: 15px 0;
 }
-
-
-
-
-
-
-

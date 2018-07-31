@@ -14,12 +14,7 @@ require('dotenv').config()
 //nikecart
 //nikecustomers
 
-//resolve the edit cart
-//get address input to work
-//cart size not working?
-
 var stripe = require("stripe")("sk_test_agkHO99WVkWu6hDrSPZqkZJz");
-
 
 const charge = stripe.charges.create({
   amount: 999,
@@ -27,7 +22,6 @@ const charge = stripe.charges.create({
   source: 'tok_visa',
   receipt_email: 'jenny.rosen@example.com',
 });
-
 
 let {
     SESSION_SECRET,
@@ -77,27 +71,20 @@ passport.use(new Auth0Strategy({
     })    
 }))
 
-
 passport.serializeUser(function(user, done){
-    // console.log(user)
     done(null, user.id)
 })
 
 passport.deserializeUser(function(id, done){  
-    // console.log(id)
-
     app.get('db').read_user([id]).then(user => {
         done(null, user); 
     })
 })
 
 app.get('/login', passport.authenticate('auth0', {
-    // successRedirect: 'http://localhost:3000/#/shop',
-    // failureRedirect: 'http://localhost:3000/#/userlogin'
     successRedirect:    `${process.env.FRONTEND_DOMAIN}/#/shop`,
     failureRedirect: `${process.env.FRONTEND_DOMAIN}/#/userlogin`
 }))
-
 
 app.get('/auth/me', function(req, res){
     if(req.user){
@@ -106,11 +93,6 @@ app.get('/auth/me', function(req, res){
         res.status(401).send('nice try sucka')
     }
 })
-
-
-
-
-
 
 app.listen(3005, function(){
     console.log('working on 3000')
@@ -128,13 +110,7 @@ app.delete('/api/remove/:id', controller.remove)
 
 app.get('/api/getcart', controller.getcart)
 
-
-
-// app.get('/api/get', controller.getusers)
-
-
 app.post('/api/getfiltered', controller.getfiltered)
-
 
 app.get('/api/getcartsize', controller.getcartsize)
 
@@ -147,15 +123,6 @@ app.post('/api/updatesize', controller.updatesize)
 app.post('/api/updateuserinformation', controller.updateuserinformation)
 
 app.post('/api/payment', controller.handlePayment)
-
-
-
-
-
-
-
-// app.post('/api/checkout', controller.checkout)
-
 
 
 

@@ -32,22 +32,12 @@ export class Product extends Component{
         })
     }
 
-    ///////I need to get the user id sorted out with auth 0
-
-    //////check my ids and user id
     addToCart(product_id, size){
         axios.post('/api/addtocart', {product_id, size}).then(res => {
-            // console.log('cart size', res)
             axios.get('/api/getcartsize').then(res => {
-                // console.log('cart total', res.data)
                 this.props.handleCartSize(res.data)
-
             })
         })
-
-
-
-
 
         //TODO if user logged in (if we have a userID) use axios call, if not use localstorage
         
@@ -59,13 +49,6 @@ export class Product extends Component{
         //     this.props.handleCartSize(tempCart.length);
 
         //     localStorage.setItem('cart', JSON.stringify(tempCart));
-
-
-        // }else{
-        //     this.props.handleCartSize(1);
-        //     localStorage.setItem('cart', JSON.stringify([{product_id, size}]))
-        // }
-        
     }
 
     render(){
@@ -130,12 +113,6 @@ export class Product extends Component{
         )
     }
 }
-
-// export function mapStateToProps(state){
-//     return{
-//         cartSize
-//     }
-// }
 
 const mapDispatchToProps = {
     handleCartSize

@@ -17,14 +17,7 @@ export class Header extends Component{
                 <div className="header-options">
                     <img src={options} />
                 </div>
-                
-
-                {/* <div className="header-links">
-          
-                    
-             
-                </div> */}
-
+ 
                 <div className="cart-button">
                     <div className="cart-login"><button><a href={`${window.origin}/login`} >LOGIN</a></button></div>
                     <div className="cart-image"><Link to="/cart"><img  src={cart}/></Link></div>

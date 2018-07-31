@@ -1,12 +1,10 @@
 module.exports = {
-
     getproducts: function(req, res){
         req.app.get('db').get_products().then(products => {
             res.status(200).send(products)
         })
     },
 
-    
     getproduct: function(req, res){
         req.app.get('db').get_product(req.params.id).then(product => {
             res.status(200).send(product)
@@ -32,15 +30,11 @@ module.exports = {
 
     },
 
-
-    ////////
-
     getfiltered: function(req, res){
         req.app.get('db').get_filtered(req.body.filter).then(cart => {
             res.status(200).send(cart)
         })
     },
-
 
     checkout: function(req, res){
         for(let i = 0; i < req.body.cart.length; i++){
@@ -55,18 +49,16 @@ module.exports = {
 
             res.status(200).send(cart)
         })
-
     },
 
     getcartsize: function(req, res){
-
         req.app.get('db').get_cart_size(req.user[0].id).then(cart => {
+
             res.status(200).send(cart[0].count)
         })
     }, 
 
     payment: function(req, res){
-
         res.sendStatus(200);
     },
 
@@ -78,19 +70,16 @@ module.exports = {
     },
 
     updatesize: function(req, res){
-        console.log('req.body', req.body)
         req.app.get('db').update_size([req.body.size, req.body.id]).then(item => {
             res.status(200).send(item)
         })
     },
 
     updateuserinformation: function(req, res){
-        console.log("user info", req.body)
-
         let {first, last, address, city, state, zip} = req.body
 
         req.app.get('db').update_user_info([first, last, address, city, state, zip]).then(result => {
-            console.log('user info updated')
+            res.sendStatus(200)
         })
     },
 
@@ -114,6 +103,4 @@ module.exports = {
             }
         )
     }
-
-
 }

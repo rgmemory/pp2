@@ -5,7 +5,6 @@
 }
 
 .product-wrapper{
-    /* border: solid green 1px; */
     height: 100%;
     width: 1150px;
     margin: auto;
@@ -14,9 +13,7 @@
 }
 
 .product-images{
-    /* border: solid black 1px; */
     height: 120vh;
-    /* width: 59%; */
     width: 630px;
     display: flex;
     flex-wrap: wrap;
@@ -24,7 +21,6 @@
 }
 
 .product-info{
-    /* border: solid orange 1px; */
     margin-top: 23px;
     height: 90%;
     width: 39%;
@@ -32,14 +28,11 @@
 }
 
 .product-images img{
-    /* border: solid black 1px; */
-
     height: 405px;
     width: 310px;
 }
 
 .product-info-top{
-    /* border: solid purple 4px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -50,38 +43,27 @@
 }
 
 .product-description{
-    /* border: solid black 1px; */
     height: 30px;
     width: 190px;
 }
 
-.product-type{
-
-}
-
 .product-cost{
-    /* border: solid black 1px; */
     height: 30px;
     width: 50px;
 }
 
 .product-name{
-    /* border: solid black 1px; */
     height: 80px;
     width: 100%;
     font-size: 35px;
-    /* margin-bottom: 10px; */
 }
 
 .product-choose-size{
-    /* margin-top: 10px; */
-    /* border: solid black 1px; */
     height: 30px;
     width: 100%;
 }
 
 .product-size{
-    /* border: solid red 1px; */
     height: 300px;
     width: 100%;
     margin-bottom: 30px;
@@ -92,8 +74,6 @@
 
 .product-size button{
     border: solid #ccc 1px;
-    /* height: 70px; */
-    /* width: 108px; */
     width: 20%;
     height: 33%;
     outline:0;
@@ -108,11 +88,9 @@
 .product-size button:focus{
     background-color: black;
     color: white;
-
 }
 
 .product-add-cart button{
-    /* border: solid black 1px; */
     height: 60px;
     width: 100%;
     background-color: black;
@@ -121,7 +99,6 @@
     border-radius: 4px;
     transition: background-color .15s;
     margin-bottom: 20px;
-    
 }
 
 .product-add-cart button:hover{
@@ -130,7 +107,6 @@
 }
 
 .product-description{
-    /* border: solid black 1px; */
     margin-top: 10px;
     height: 110px;
     width: 100%;
@@ -139,7 +115,6 @@
 }
 
 .product-description p{
-    /* border: solid black 1px; */
     letter-spacing: 1px;
     word-spacing: 4px;
     line-height: 21px;

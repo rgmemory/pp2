@@ -18,12 +18,10 @@ class App extends Component {
 
         
 
-        {/* <div className="wrapper"> */}
           <Header />
           <Shopheader />
           {routes}
           <Footer />
-        {/* </div> */}
         
       </div>
     );
