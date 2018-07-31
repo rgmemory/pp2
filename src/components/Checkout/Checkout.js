@@ -112,9 +112,6 @@ export class Checkout extends Component{
         return(
             <div className="checkout">
             
-            
-                
-
                     <div className="checkout-title"><h1>CHECKOUT</h1></div>
 
                 <div className="checkout-body">
@@ -125,9 +122,6 @@ export class Checkout extends Component{
 
                         <div className="checkout-left-body">
 
-
-
-                            {/* fix the values on the inputs */}
                             <div className="checkout-names">
                                 <div className="checkout-first"><input onChange={e => this.handleFirst(e.target.value)} type="text" value={this.state.first}/></div>
                                 <div className="checkout-last"><input onChange={e => this.handleLast(e.target.value)} type="text" value={this.state.last}/></div>
@@ -192,7 +186,6 @@ export class Checkout extends Component{
                                 <div>${parseFloat(Math.round((this.props.subtotal * 1.06) * 100) / 100).toFixed(2)}</div>
                             </div>
                         </div>
-
 
                         <div className="checkout-incart">
                         

@@ -19,13 +19,10 @@ export class Cart extends Component{
        this.remove = this.remove.bind(this)
        this.edit = this.edit.bind(this)
        this.updateCart = this.updateCart.bind(this)
-
     }
 
     componentDidMount(){
         axios.get('/api/getcart').then(res => {
-            // console.log('cart get mount', res.data)
-
             let subtotal = 0;
 
             for(let i = 0; i < res.data.length; i++){
@@ -45,12 +42,7 @@ export class Cart extends Component{
     }
 
     showModal = (value) => {
-
-        // console.log('showmodal should be product id', value)
-
         axios.get(`/api/getedit/${value}`).then(res => {
-            // console.log('getedit front end', res.data[0])
-
             this.props.handleeditCart(res.data[0])
         })
 
@@ -89,22 +81,15 @@ export class Cart extends Component{
     }
 
     remove(value){
-        console.log('remove clicked', value)
-
         axios.delete(`/api/remove/${value}`).then(stuff => {
             
             axios.get('/api/getcart').then(res => {
-                console.log('cart get mount', res.data)
 
                 let subtotal = 0;
 
                 for(let i = 0; i < res.data.length; i++){
                     subtotal += res.data[i].cost;
                 }
-
-                // subtotal = parseFloat(Math.round(subtotal * 100) / 100).toFixed(2);
-                // total = parseFloat(Math.round(total * 100) / 100).toFixed(2);
-
 
                 this.props.handleSubtotal(subtotal)
 
