@@ -118,7 +118,7 @@ app.post('/api/payment', controller.payment)
 
 app.get('/api/getedit/:id', controller.getedit)
 
-app.post('/api/updatesize', controller.updatesize)
+app.put('/api/updatesize', controller.updatesize)
 
 app.post('/api/updateuserinformation', controller.updateuserinformation)
 

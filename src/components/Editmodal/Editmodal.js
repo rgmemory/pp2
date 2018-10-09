@@ -30,7 +30,7 @@ export class Editmodal extends Component{
     }
 
     updateSize(){
-        axios.post('/api/updatesize', {size: this.state.size, id: this.props.editCart[0].id}).then(res => {
+        axios.put('/api/updatesize', {size: this.state.size, id: this.props.editCart[0].id}).then(res => {
             this.props.updateCart();
             this.props.handleClearEditCart();
             this.props.close()
